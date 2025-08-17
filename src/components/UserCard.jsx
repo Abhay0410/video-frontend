@@ -1,12 +1,21 @@
+// // src/components/UserCard.jsx
 import { Link } from "react-router-dom";
+import useAuthUser from "../hooks/useAuthUser";
 
 export default function UserCard({ user }) {
+  const { authUser } = useAuthUser();
+
+  // Deterministic meeting ID: same for both caller & receiver
+  const callId = [authUser._id, user._id].sort().join("_");
+
   return (
     <div className="border rounded p-4 flex items-center justify-between">
       <div className="flex items-center gap-3">
-        {/* eslint-disable-next-line jsx-a11y/img-redundant-alt */}
         <img
-          src={user.profilePic || `https://ui-avatars.com/api/?name=${encodeURIComponent(user.fullName)}`}
+          src={
+            user.profilePic ||
+            `https://ui-avatars.com/api/?name=${encodeURIComponent(user.fullName)}`
+          }
           className="w-10 h-10 rounded-full object-cover"
           alt="user avatar"
         />
@@ -16,10 +25,16 @@ export default function UserCard({ user }) {
         </div>
       </div>
       <div className="flex items-center gap-2">
-        <Link to={`/chat/${user._id}`} className="px-3 py-1.5 border rounded hover:bg-gray-50">
+        <Link
+          to={`/chat/${user._id}`}
+          className="px-3 py-1.5 border rounded hover:bg-gray-50"
+        >
           Chat
         </Link>
-        <Link to={`/call/${user._id}`} className="px-3 py-1.5 border rounded hover:bg-gray-50">
+        <Link
+          to={`/call/${callId}`}
+          className="px-3 py-1.5 border rounded hover:bg-gray-50"
+        >
           Call
         </Link>
       </div>
