@@ -7,6 +7,7 @@ import ChatPage from "./pages/ChatPage.jsx";
 import CallPage from "./pages/CallPage.jsx";
 import useAuthUser from "./hooks/useAuthUser.js";
 import PageLoader from "./components/PageLoader.jsx";
+import NotFound from "./pages/NotFound.jsx";
 
 function Protected({ children }) {
   const { authUser, isLoading } = useAuthUser();
@@ -23,6 +24,7 @@ export default function Router() {
         <Route path="/" element={<Navigate to="/dashboard" replace />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/register" element={<RegisterPage />} />
+        <Route path="*" element={<NotFound />} />
 
         <Route
           path="/dashboard"
