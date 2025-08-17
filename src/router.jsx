@@ -50,7 +50,7 @@ export default function Router() {
             </Protected>
           }
         />
-        <Route path="*" element={<Navigate to="/dashboard" />} />
+        {/* <Route path="*" element={<Navigate to="/dashboard" />} /> */}
       </Routes>
     </>
   );
